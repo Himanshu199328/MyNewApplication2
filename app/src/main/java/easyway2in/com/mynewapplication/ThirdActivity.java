@@ -1,10 +1,11 @@
 package easyway2in.com.mynewapplication;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -12,10 +13,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 public class ThirdActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    SharedPreferences sharedPreferences;
+    TextView headerText;
+    TextView subHeaderText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +46,19 @@ public class ThirdActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //to assign the dynamic value to header like the firstname entered or mobile number
+        //the header view will need to be inflated in the Third Activity
+        //Make sure to remove the line which tells the navigation view in third_layout file about navigation_header as otherwise it will shown twice
+        View headerView = navigationView.inflateHeaderView(R.layout.nav_header_third);//http://stackoverflow.com/questions/33560219/in-android-how-to-set-navigation-drawer-header-image-and-name-programmatically-i
+        headerText = (TextView) headerView.findViewById(R.id.headerText);
+        subHeaderText = (TextView) headerView.findViewById(R.id.subHeaderText);
+
+        sharedPreferences = getSharedPreferences(MainActivity.MYPREFERENCES, Context.MODE_PRIVATE);
+
+        headerText.setText(sharedPreferences.getString(MainActivity.firstNameKey, "Android Studio"));
+        subHeaderText.setText(sharedPreferences.getString(MainActivity.mobileNumberKey,"android"));
+
     }
 
     @Override

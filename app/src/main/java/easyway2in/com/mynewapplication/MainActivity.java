@@ -12,6 +12,13 @@ import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
     public final static String MESSAGE_KEY="easyway2in.com.mynewapplication.message_key";
+
+    public final static String firstNameKey = "firstName";
+    public final static String lastNameKey = "lastName";
+    public final static String emailKey = "email";
+    public final static String mobileNumberKey = "mobileNumber";
+    public final static String MYPREFERENCES = "MyPrefs";
+
     EditText message_text;
     EditText message1_text;
     EditText EmailId;
@@ -30,6 +37,14 @@ public class MainActivity extends AppCompatActivity {
         EmailId=(EditText)findViewById(R.id.message2_Text);
         Mobilenumber=(EditText)findViewById(R.id.message3_Text);
 
+        //Here you need to get the shared preferences using the key MYPREFERENCES .
+        sharedPreferences = getSharedPreferences(MYPREFERENCES,Context.MODE_PRIVATE);
+        //get the value of firstname from the shared pred using the firstNameKey and setting it in the editText message_text
+        message_text.setText(sharedPreferences.getString(firstNameKey,null));//default value is assigned null . So that hint can show up
+        message1_text.setText(sharedPreferences.getString(lastNameKey,null));
+        EmailId.setText(sharedPreferences.getString(emailKey,null));
+        Mobilenumber.setText(sharedPreferences.getString(mobileNumberKey,null));
+
 
     }
     public void sendMessage(View view)
@@ -41,13 +56,15 @@ public class MainActivity extends AppCompatActivity {
      String eI=EmailId.getText().toString();
      String Mn= Mobilenumber.getText().toString();
         SharedPreferences.Editor editor=sharedPreferences.edit();
-        editor.putString(MESSAGE_KEY,message);
-        editor.putString(MESSAGE_KEY,message1);
-        editor.putString(MESSAGE_KEY,eI);
-        editor.putString(MESSAGE_KEY,Mn);
+        //key for every thing cannot be same . other wise it will override.
+        //Need to put different key for every value .
+        editor.putString(firstNameKey,message);
+        editor.putString(lastNameKey,message1);
+        editor.putString(emailKey,eI);
+        editor.putString(mobileNumberKey,Mn);
         editor.commit();
-        Intent intent = new Intent(this,SecondActivity.class);
-        intent.putExtra(MESSAGE_KEY,message);
+        Intent intent = new Intent(this,ThirdActivity.class);//This will open the third activity
+        intent.putExtra(MESSAGE_KEY,message);  //no need to put values in intent becoz already storing in shared preferences.
         intent.putExtra(MESSAGE_KEY,message1);
         intent.putExtra(MESSAGE_KEY,eI);
         intent.putExtra(MESSAGE_KEY,Mn);
