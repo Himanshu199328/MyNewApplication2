@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
 
     SharedPreferences sharedPreferences;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +48,12 @@ public class MainActivity extends AppCompatActivity {
     }
     public void sendMessage(View view)
     {
+
+        ////String message = message_text.getText().toString();
+        ////String message1 = message_text.getText().toString();
+        ////String e1 =Emailid.getText().toString();
+        ////String Mn= Mobilenumber.getText().toString();
+
 
 
      String message = message_text.getText().toString();
