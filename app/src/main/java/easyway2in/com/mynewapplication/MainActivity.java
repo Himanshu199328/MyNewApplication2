@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
-    public final static String MESSAGE_KEY="easyway2in.com.mynewapplication.message_key";
 
     public final static String firstNameKey = "firstName";
     public final static String lastNameKey = "lastName";
@@ -30,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        sharedPreferences = getSharedPreferences(MESSAGE_KEY, Context.MODE_PRIVATE);
+      //sharedPreferences = getSharedPreferences(ME, Context.MODE_PRIVATE);
         message_text=(EditText)findViewById(R.id.message_Text);
         message1_text=(EditText)findViewById(R.id.message1_Text);
         EmailId=(EditText)findViewById(R.id.message2_Text);
@@ -69,10 +68,10 @@ public class MainActivity extends AppCompatActivity {
         editor.putString(mobileNumberKey,Mn);
         editor.commit();
         Intent intent = new Intent(this,ThirdActivity.class);//This will open the third activity
-        intent.putExtra(MESSAGE_KEY,message);  //no need to put values in intent becoz already storing in shared preferences.
-        intent.putExtra(MESSAGE_KEY,message1);
-        intent.putExtra(MESSAGE_KEY,eI);
-        intent.putExtra(MESSAGE_KEY,Mn);
+//        intent.putExtra(MESSAGE_KEY,message);  //no need to put values in intent becoz already storing in shared preferences.
+//        intent.putExtra(MESSAGE_KEY,message1);
+//        intent.putExtra(MESSAGE_KEY,eI);
+//        intent.putExtra(MESSAGE_KEY,Mn);
         startActivity(intent);
 
 
